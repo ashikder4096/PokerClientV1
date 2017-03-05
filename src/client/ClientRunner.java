@@ -3,7 +3,7 @@ import java.awt.EventQueue;
 
 public class ClientRunner {
 	public static void main(String[] args) {
-		Connection Asif = new Connection("127.0.0.1", 5312, "Asif");
+		Connection Asif = new Connection("127.0.0.1", 5342, "Asif");
 		
 		
 		EventQueue.invokeLater(new Runnable() {

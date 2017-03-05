@@ -50,7 +50,7 @@ public class Connection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		player = new Player();		
+		player = new Player();
 	}
 	
 	private void setupStream() {
@@ -69,16 +69,16 @@ public class Connection {
 		}
 	}
 	
-	public void closeConnection()
-	{
-		try {
-			System.out.println("Closing connection....");
-			write.close();
-			read.close();
-			connection.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void closeConnection()
+//	{
+//		try {
+//			System.out.println("Closing connection....");
+//			write.close();
+//			read.close();
+//			connection.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

@@ -78,25 +78,9 @@ public class PokerGUI extends JFrame implements Runnable{
 	public PokerGUI(Connection user)
 	{
 		this.user = user;
-		GUIStart();
-	}
-	
-	public PokerGUI() {
-		GUIStart();
-	}
-	
-	public void GUIStart()
-	{
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-//	    addWindowListener(new WindowAdapter() {
-//	        public void windowClosing(WindowEvent e) {
-//	        	user.closeConnection();
-//	        	System.exit(0);
-//	        }
-//	      });
-		
+
 		setBounds(100, 100, 836, 605);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -260,7 +244,6 @@ public class PokerGUI extends JFrame implements Runnable{
 		messageBox = new JTextField();
 		messageBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent a) {
-//				chatWindow.append("Me: " + a.getActionCommand() +  "\n");
 				try {
 					user.Write().writeUTF("CHAT# " + a.getActionCommand());
 					messageBox.setText("");
@@ -269,17 +252,14 @@ public class PokerGUI extends JFrame implements Runnable{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				textField.setText("");
 			}
 		});
 		messageBox.setBounds(564, 526, 241, 22);
 		contentPane.add(messageBox);
 		messageBox.setColumns(10);
-	}
-	
-	public void Close()
-	{
-		user.closeConnection();
+		
+		Thread t = new Thread(this);
+		t.start();
 	}
 	
 	public void buttonsRefresh()
@@ -296,27 +276,16 @@ public class PokerGUI extends JFrame implements Runnable{
 		while(true)
 		{
 			String message = null;
-			
 			try {
 				message = user.Read().readUTF();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//Receives Chats
-			if(message.contains("CHAT# "))
+			if(message.contains("CHAT# "));
 			{
 //				System.out.println(message);
-//				chatWindow.append(message.substring(6) +  "\n");
-			}
-			
-			if(message.contains("PLAYERTURN# "))
-			{
-				//Get inputs
-				
-				//refresh possible moves
-				buttonsRefresh();
+				chatWindow.append(message.substring(6) +  "\n");
 			}
 			
 			try {
