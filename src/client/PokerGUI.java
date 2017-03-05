@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 
@@ -68,14 +70,33 @@ public class PokerGUI extends JFrame implements Runnable{
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public PokerGUI(Connection user) {
+	public PokerGUI(Connection user)
+	{
 		this.user = user;
+		GUIStart();
+	}
+	
+	public PokerGUI() {
+		GUIStart();
+	}
+	
+	public void GUIStart()
+	{
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+//	    addWindowListener(new WindowAdapter() {
+//	        public void windowClosing(WindowEvent e) {
+//	        	user.closeConnection();
+//	        	System.exit(0);
+//	        }
+//	      });
+		
 		setBounds(100, 100, 836, 605);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -242,6 +263,8 @@ public class PokerGUI extends JFrame implements Runnable{
 //				chatWindow.append("Me: " + a.getActionCommand() +  "\n");
 				try {
 					user.Write().writeUTF("CHAT# " + a.getActionCommand());
+					messageBox.setText("");
+					user.Write().flush();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -252,6 +275,11 @@ public class PokerGUI extends JFrame implements Runnable{
 		messageBox.setBounds(564, 526, 241, 22);
 		contentPane.add(messageBox);
 		messageBox.setColumns(10);
+	}
+	
+	public void Close()
+	{
+		user.closeConnection();
 	}
 	
 	public void buttonsRefresh()
@@ -280,7 +308,7 @@ public class PokerGUI extends JFrame implements Runnable{
 			if(message.contains("CHAT# "))
 			{
 //				System.out.println(message);
-				chatWindow.append(message.substring(6) +  "\n");
+//				chatWindow.append(message.substring(6) +  "\n");
 			}
 			
 			if(message.contains("PLAYERTURN# "))

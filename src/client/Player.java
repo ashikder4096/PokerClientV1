@@ -7,6 +7,12 @@ public class Player{
 	private boolean isBigBlind = false, isSmallBlind = false, isStarting = false, isPlaying = false, isMyTurn = false;
 	private Actions action;
 	
+	public static void main(String[] args) {
+		Player p = new Player();
+		p.setBigBlind(true);
+		System.out.println(p.isBigBlind);
+	}
+	
 	public Player()
 	{
 
