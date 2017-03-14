@@ -264,11 +264,11 @@ public class PokerGUI extends JFrame implements Runnable{
 	
 	public void buttonsRefresh()
 	{
-		ArrayList<Actions> action = user.Player().possibleActions();
-		btnCall.setEnabled(action.contains(Actions.CALL));
-		btnCheck.setEnabled(action.contains(Actions.CHECK));
-		btnBetRaise.setEnabled(action.contains(Actions.RAISE));
-		btnFold.setEnabled(action.contains(Actions.FOLD));
+		ArrayList<PlayerAction> action = user.Player().possibleActions();
+		btnCall.setEnabled(action.contains(PlayerAction.CALL));
+		btnCheck.setEnabled(action.contains(PlayerAction.CHECK));
+		btnBetRaise.setEnabled(action.contains(PlayerAction.RAISE));
+		btnFold.setEnabled(action.contains(PlayerAction.FOLD));
 	}
 
 	@Override

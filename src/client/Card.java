@@ -13,6 +13,13 @@ package client;
  * <code>Card</code> represents a playing card.
  */
 public class Card {
+	
+	public static void main(String[] args) {
+		
+		Card a = new Card("A", "DIAMOND", 14);
+		Card b = new Card("A", "SPADES", 14);
+		System.out.println(b.comparedTo(a));
+	}
 
 	/**
 	 * String value that holds the suit of the card
@@ -71,6 +78,33 @@ public class Card {
 	public int pointValue() {
 		return pointValue;
 	}
+	
+	//Poker logic
+	/**
+	 * 
+	 * @param b card to compared to
+	 * @return 1 if this is higher, 0 if they are the same, -1 if the other card is higher
+	 */
+	public int comparedTo(Card b)
+	{
+		if(this.pointValue == b.pointValue)
+		{
+			if(this.suit.compareTo(b.suit) >0)
+			{
+				return 1;
+			}
+			else if(this.suit.compareTo(b.suit)  == 0)
+			{
+				return 0;
+			}
+			else return -1;
+		}
+		if(this.pointValue > b.pointValue)
+		{
+			return 1;
+		}
+		else return -1;
+	}
 
 	/** Compare this card with the argument.
 	 * @param otherCard the other card to compare to this
@@ -97,6 +131,46 @@ public class Card {
 	 */
 	@Override
 	public String toString() {
+		if(this == null)
+		{
+			return "";
+		}
 		return "[" + rank + "] of [" + suit + "] (point value = [" + pointValue +"])";
+	}
+	
+	public static Card toCard(String str)
+	{
+		String Rank = "", Suit = "", PV = "";
+
+		
+		for (int i = 0 ; i < str.length() - 1 ; i++)
+		{
+			if(str.substring(i, i+1).equals("["))
+			{
+				if(Rank.equals(""))
+				{
+					for (int j = i + 1 ; !(str.substring(j,j+1).equals("]")); j++)
+					{
+						Rank += str.substring(j,j+1);
+					}
+				}
+				else if(Suit.equals(""))
+				{
+					for (int k = i + 1 ; !(str.substring(k, k+1).equals("]")); k++)
+					{
+						Suit += str.substring(k,k+1);
+					}
+				}
+				else// (PV.equals(""))
+				{
+					for (int l = i + 1 ; !(str.substring(l,l+1).equals("]")); l++)
+					{
+						PV += str.substring(l,l+1);
+					}
+				}
+			}
+		}
+		int pointValue = Integer.parseInt(PV);
+		return new Card(Rank,Suit,pointValue);
 	}
 }
